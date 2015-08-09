@@ -1,0 +1,12 @@
+/applicationContext-dao.xml
+/applicationContext-resources.xml
+/applicationContext-service.xml
+/displaytag.properties
+/displaytag_zh_CN.properties
+/ehcache.xml
+/hibernate.cfg.xml
+/jdbc.properties
+/log4j.xml
+/logback.xml
+/mail.properties
+/org/

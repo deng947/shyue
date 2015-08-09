@@ -1,0 +1,14 @@
+<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+    <session-factory>
+        <mapping class="org.openfans.gear.sample.Person"/>
+        <mapping class="org.openfans.gear.sample.Computer"/>
+        <mapping class="org.openfans.gear.auth.User" />
+		<mapping class="org.openfans.gear.auth.Role" />
+		<mapping class="org.openfans.gear.auth.Dept" />
+		<mapping class="org.openfans.gear.auth.Org" />
+		<mapping class="org.openfans.gear.auth.Resource" />
+    </session-factory>
+</hibernate-configuration>

@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">  
+    <appender name="LogToConsole" class="org.apache.log4j.ConsoleAppender">
+		<layout class="org.apache.log4j.PatternLayout">
+                   <param name="ConversionPattern"
+		          value="%d{yyyy-MM-dd hh:mm:ss} [%F:%L] [%p] %m%n"/>
+		</layout>
+		<filter class="org.apache.log4j.varia.LevelRangeFilter">
+			<param name="LevelMin" value="INFO" />
+			<param name="LevelMax" value="ERROR" />
+		</filter>		
+	</appender>
+	<appender name="LogToFile" class="org.apache.log4j.RollingFileAppender">
+		<param name="File" value="/filebak/eContractlog/system/eContract.log" />
+		<param name="Append" value="true" />
+		<param name="MaxFileSize" value="20000KB" />
+		<param name="MaxBackupIndex" value="100" />
+		
+		<param name="BufferSize" value="8192" />
+		<param name="ImmediateFlush" value="false" />
+		<param name="BufferedIO" value="true" />
+		
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d{yyyy-MM-dd hh:mm:ss} [%F:%L] [%p] %m%n" />
+		</layout>
+		<filter class="org.apache.log4j.varia.LevelRangeFilter">
+			<param name="LevelMin" value="FATAL" />
+			<param name="LevelMax" value="FATAL" />
+		</filter>
+	</appender>
+	<appender name="ZteLogToFile" class="org.apache.log4j.RollingFileAppender">
+		<param name="File" value="/filebak/eContractlog/zte/sysZteDatas.log" />
+		<!-- 设置是否在重新启动服务时，在原有日志的基础添加新日志 --> 
+		<param name="Append" value="true" />
+		<param name="MaxFileSize" value="20000KB" />
+		<param name="MaxBackupIndex" value="100" />
+		<param name="BufferSize" value="8192" />
+		<param name="ImmediateFlush" value="false" />
+		<param name="BufferedIO" value="true" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d{yyyy-MM-dd hh:mm:ss} [%F:%L] [%p] %m%n" />
+		</layout>
+		<filter class="org.apache.log4j.varia.LevelRangeFilter">
+			<param name="LevelMin" value="INFO" />
+			<param name="LevelMax" value="FATAL" />
+		</filter>
+	</appender>
+    <logger name="com.ibatis">
+        <level value="debug"/>
+    </logger> 
+    <logger name="java.sql">
+        <level value="debug"/>
+    </logger> 
+	   
+    <logger name="net.sf.ehcache">
+        <level value="ERROR"/>
+    </logger>
+
+    <!-- Suppress success logging from InteractiveAuthenticationSuccessEvent -->
+    <logger name="org.springframework.security">
+        <level value="ERROR"/>
+    </logger>
+
+    <logger name="org.apache">
+        <level value="WARN"/>
+    </logger>
+
+    <logger name="org.apache.velocity">
+        <level value="FATAL"/>
+    </logger>
+
+    <!-- Suppress invalid warning messages from JSF -->
+    <logger name="org.apache.myfaces.shared_impl.renderkit.html">
+        <level value="ERROR"/>
+    </logger>
+
+    <logger name="org.hibernate">
+        <level value="INFO"/>
+    </logger>
+  
+    <!--logger name="org.hibernate.SQL">
+        <level value="DEBUG"/>
+    </logger-->
+
+    <logger name="org.springframework">
+        <level value="INFO"/>
+    </logger>
+    
+
+    <root>
+        <priority value="trace" />
+        <!--level value="WARN"/-->      
+		<appender-ref ref="LogToConsole" />
+		<appender-ref ref="LogToFile" />
+    </root>
+</log4j:configuration>

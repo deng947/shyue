@@ -1,0 +1,205 @@
+/* A CSS Framework by Mike Stenhouse of Content with Style */
+
+/* SITE SPECIFIC LAYOUT */
+    body {
+        margin: 0;
+        padding: 300;
+        background: white url(../images/background.gif) top left repeat-x;
+        text-align: center;
+    }
+    div#page {
+        margin: 0 auto;
+        padding: 0;
+        width:95%;
+        text-align: center;
+    }
+    
+    /* HEADER */
+        div#header {
+            margin: 0;
+            padding: 0;
+            text-align: right;
+            height: 30px; /* needed by IE 7 */
+            
+        }
+        
+            div#switchLocale {
+                position: absolute;
+                right: 10px;
+            }
+        div#toplink{
+        	padding: 20px 20px 0px 0px;
+        }
+        div#branding {
+            float: left;
+            width: 50%;
+            margin-top: -20px;
+            padding: 0px 0 0px 30px;
+            text-align: left;
+        }
+        div#search {
+            float: right;
+            width: 49%;
+            margin: 0;
+            padding: 40px 40px 0 0;
+
+            text-align: right;
+        }
+    /* END HEADER */
+    
+    /* CONTENT */
+        div#content {
+        }
+            body#error #content {
+                margin-top: 0px;
+            }
+        /* MAIN */
+            div#mainContent {
+                padding: 5px 0 0 5px;
+                margin-left:130px;
+            }
+            
+            div#mainContent h1{
+                padding: 5px 0 5px 20px;
+                margin: 5px 0 0 15px;
+                font-size:12px;
+                color:#369;
+                text-align:left;  
+                background: url(../images/Forum_nav.gif) top left no-repeat;           
+            }
+            
+            div#displayButton{
+                text-align:right;
+                margin:5px 10px 5px 0;
+            }
+            
+            div#mainContent form ul li {
+                    list-style-type: none;
+                    margin-left: 0;
+                    margin-top: 0;
+                }
+        /* END MAIN */
+        
+        div#left {
+        	float: left;
+			width: 120px;
+			margin: 0;
+			height:400px;
+			padding-top:10px;
+        }
+        
+        div#navbar
+		{
+			float: left;
+			width:10px;
+			padding:0;
+			background-color:#ddd;
+			height:400px;
+			border:1px solid gray;	
+			cursor:e-resize;
+		}
+		
+		div#navbar a{
+			text-decoration:none;
+		}
+        
+        /* SUB */
+            div#sub h2 {
+                margin-bottom: 5px;
+            }
+            
+            div#sub ul li {
+                list-style-type: none;
+                padding-bottom: 10px;
+            }
+                div#sub p.line {
+                    border-top: 1px dotted #ccc;
+                    margin: 15px 0;
+                }
+            
+        /* END SUB */
+        
+    /* END CONTENT */
+    
+    /* FOOTER */
+        div#footer {
+            color: #444;
+            padding: 1em;
+            text-align: left;
+            font-size: 0.9em;
+            background-color:#ddd;
+            border-top: 1px solid gray;
+        }
+
+            div#footer div#divider {
+                    margin: 0 0 4px 0;
+                    border-top: 1px solid #ccc;
+            }
+
+            div#footer div#divider div {
+                    margin: 1px 0 0 0;
+                    border-top: 6px solid #ebf5fc;
+            }
+
+            div#footer .left {
+                    float: left;
+            }
+
+            div#footer .right {
+                    float: right;
+            }
+    /* END FOOTER */
+    
+fieldset {
+ padding:10px;
+ margin-top:5px;
+ border:none;
+ background:#fff;
+ width:96%;
+}
+
+fieldset label {
+ float:left;
+ width:100px;
+ text-align:right;
+ padding:1px 3px 4px 4px;
+ margin:4px 3px 4px 4px;
+}
+
+fieldset font {
+ text-align:left;
+ font-size:14px;
+}
+
+div.leftForm{
+	text-align:left;
+	float:left;
+	clear:left;
+	width:49%;
+}
+
+div.rightForm{
+	text-align:left;
+	float:right;
+	clear:right;
+	width:49%;
+}
+
+div.commonForm{
+	text-align:left;
+	float:left;
+	clear:left;
+	width:90%;
+}
+
+div.formButton{
+	clear:both;
+	text-align:center;
+}
+
+div.dtree{
+	float:right;
+	margin-right:50px;
+}
+
+/* END LAYOUT */

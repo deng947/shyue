@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd"
+	default-lazy-init="true">
+
+	<!-- Hibernate SessionFactory -->
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="configLocation" value="classpath:hibernate.cfg.xml" />
+		<property name="hibernateProperties">
+			<value>
+				hibernate.dialect=${hibernate.dialect}
+				hibernate.query.substitutions=true 'Y', false 'N'
+				hibernate.cache.use_second_level_cache=true
+				hibernate.cache.provider_class=org.hibernate.cache.EhCacheProvider
+				hibernate.hbm2ddl.auto=update
+				hibernate.show_sql=true
+            </value>
+			<!-- Turn batching off for better error messages under PostgreSQL -->
+			<!-- hibernate.jdbc.batch_size=0 -->
+		</property>
+	</bean>
+	<!--
+		Transaction manager for a single Hibernate SessionFactory (alternative
+		to JTA)
+	-->
+	<bean id="transactionManager"
+		class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<!--
+		===================================================================
+		如无复杂的Dao逻辑，可无需生成对应的spring	bean，只在applicationContext-service.xml中配置Manager bean即可.
+	-->
+	<!-- <bean id="personDao" class="org.openfans.gear.dao.hibernate.GenericDaoHibernate">
+		<constructor-arg value="org.openfans.gear.sample.Person" />
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean> -->
+
+	<bean id="authUtil" class="org.cb.zframe.auth.AuthUtil">
+		<property name="userManager" ref="userManager" />
+	</bean>
+</beans>

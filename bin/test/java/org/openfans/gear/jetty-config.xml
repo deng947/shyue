@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<!DOCTYPE Configure PUBLIC "-//Mort Bay Consulting//DTD Configure 1.2//EN" 
+	"http://jetty.mortbay.org/configure_1_2.dtd">
+<Configure class="org.mortbay.jetty.Server">
+	<Call name="addListener">
+		<Arg>
+			<New class="org.mortbay.http.SocketListener">
+				<Set name="Port" type="int">
+					<SystemProperty name="jetty.port" default="8081" />
+				</Set>
+			</New>
+		</Arg>
+	</Call>
+	<Call name="addWebApplication">
+		<Arg>/</Arg>
+		<Arg>src/main/webapp</Arg>
+	</Call>
+	<Set name="requestsPerGC" type="int">2000</Set>
+	<Set name="statsOn" type="boolean">false</Set>
+</Configure>

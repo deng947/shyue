@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:beans="http://www.springframework.org/schema/beans"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
+              http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-2.0.1.xsd">
+	<http auto-config="true" lowercase-comparisons="false">
+		<form-login login-page="/security/login.jsp"
+			authentication-failure-url="/security/login.jsp?login_error=1"
+			default-target-url="/index.do" />
+		<logout logout-success-url="/security/login.jsp" />
+		<intercept-url pattern="/images/*" filters="none"/>
+        <intercept-url pattern="/styles/*" filters="none"/>
+        <intercept-url pattern="/scripts/*" filters="none"/>
+		<intercept-url pattern="/security/**" access="ROLE_ANONYMOUS" />
+		<intercept-url pattern="/services/**" access="ROLE_ANONYMOUS" />
+		<intercept-url pattern="/initAuth.do" access="ROLE_ANONYMOUS" />
+		<intercept-url pattern="/deploy.html" access="ROLE_ADMIN" />
+		<intercept-url pattern="/**" access="ROLE_USER" />
+	</http>
+	<authentication-provider user-service-ref="userManager">
+		<password-encoder ref="passwordEncoder" /> 
+	</authentication-provider>
+		
+	<!--  authentication-provider>
+		<user-service id="xmlUserService">
+			<user name="admin" password="admin" authorities="ROLE_USER, ROLE_ADMIN" />
+			<user name="user" password="user" authorities="ROLE_USER" />
+		</user-service>
+	</authentication-provider>-->
+	
+</beans:beans>

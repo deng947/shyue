@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+            http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd
+            http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd"
+	default-lazy-init="true">
+	<aop:config>
+		<aop:pointcut id="serviceOperation" expression="execution(* *..service.*Manager.*(..))" />
+		<aop:advisor pointcut-ref="serviceOperation" advice-ref="txAdvice" />
+	</aop:config>
+	<tx:advice id="txAdvice">
+		<tx:attributes>
+			<tx:method name="get*" read-only="true" />
+			<tx:method name="*" />
+		</tx:attributes>
+	</tx:advice>
+	<!--
+		===================================================================Start
+		CRUD类型的Service对象无需新增代码，只要复制并修改以下bean配置中的实体bean类即可 
+	-->
+	<bean id="personManager" class="org.cb.zframe.service.impl.GenericManagerImpl">
+		<constructor-arg>
+			<bean class="org.cb.zframe.dao.hibernate.GenericDaoHibernate">
+				<constructor-arg value="org.cb.zframe.sample.Person" />
+				<property name="sessionFactory" ref="sessionFactory" />
+			</bean>
+		</constructor-arg>
+	</bean>	
+	
+	<bean id="computerManager" class="org.cb.zframe.service.impl.GenericManagerImpl">
+		<constructor-arg>
+			<bean class="org.cb.zframe.dao.hibernate.GenericDaoHibernate">
+				<constructor-arg value="org.cb.zframe.sample.Computer" />
+				<property name="sessionFactory" ref="sessionFactory" />
+			</bean>
+		</constructor-arg>
+	</bean>	
+	<!--
+		===================================================================End
+	-->
+	<!-- Add new Managers here -->
+	<bean id="userManager" class="org.cb.zframe.auth.service.impl.UserManagerImpl">
+		<constructor-arg>
+			<bean class="org.cb.zframe.dao.hibernate.GenericDaoHibernate">
+				<constructor-arg value="org.cb.zframe.auth.User" />
+				<property name="sessionFactory" ref="sessionFactory" />
+			</bean>
+		</constructor-arg>
+		<property name="passwordEncoder" ref="passwordEncoder" />
+	</bean>
+
+	<bean id="passwordEncoder"
+		class="org.springframework.security.providers.encoding.ShaPasswordEncoder" />
+
+	<bean id="roleManager" class="org.cb.zframe.auth.service.impl.RoleManagerImpl">
+		<constructor-arg>
+			<bean class="org.cb.zframe.dao.hibernate.GenericDaoHibernate">
+				<constructor-arg value="org.cb.zframe.auth.Role" />
+				<property name="sessionFactory" ref="sessionFactory" />
+			</bean>
+		</constructor-arg>
+	</bean>
+	<bean id="deptManager" class="org.cb.zframe.auth.service.impl.DeptManagerImpl">
+		<constructor-arg>
+			<bean class="org.cb.zframe.dao.hibernate.GenericDaoHibernate">
+				<constructor-arg value="org.cb.zframe.auth.Dept" />
+				<property name="sessionFactory" ref="sessionFactory" />
+			</bean>
+		</constructor-arg>
+	</bean>
+	<bean id="orgManager" class="org.cb.zframe.auth.service.impl.OrgManagerImpl">
+		<constructor-arg>
+			<bean class="org.cb.zframe.dao.hibernate.GenericDaoHibernate">
+				<constructor-arg value="org.cb.zframe.auth.Org" />
+				<property name="sessionFactory" ref="sessionFactory" />
+			</bean>
+		</constructor-arg>
+	</bean>
+	<bean id="resourceManager" class="org.cb.zframe.service.impl.GenericManagerImpl">
+		<constructor-arg>
+			<bean class="org.cb.zframe.dao.hibernate.GenericDaoHibernate">
+				<constructor-arg value="org.cb.zframe.auth.Resource" />
+				<property name="sessionFactory" ref="sessionFactory" />
+			</bean>
+		</constructor-arg>
+	</bean>
+
+	<bean id="initManager" class="org.cb.zframe.auth.service.impl.InitManagerImpl">
+		<property name="userManager" ref="userManager" />
+		<property name="roleManager" ref="roleManager" />
+		<property name="deptManager" ref="deptManager" />
+		<property name="orgManager" ref="orgManager" />
+		<property name="resourceManager" ref="resourceManager" />
+	</bean>
+</beans>
