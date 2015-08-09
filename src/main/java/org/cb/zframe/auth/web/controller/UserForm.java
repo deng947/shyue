@@ -2,6 +2,10 @@ package org.cb.zframe.auth.web.controller;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.cb.zframe.auth.Dept;
+import org.cb.zframe.auth.Org;
+import org.cb.zframe.auth.User;
+import org.cb.zframe.service.GenericManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,9 +16,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-
-import org.cb.zframe.auth.User;
-import org.cb.zframe.service.GenericManager;
 
 /**
  * Handle Form (New Update Delete)<br>
@@ -34,6 +35,24 @@ public class UserForm {
 
 	public void setUserManager(GenericManager<User, Long> userManager) {
 		this.userManager = userManager;
+	} 
+	
+	
+	
+	@Autowired
+	@Qualifier("deptManager")
+	private GenericManager<Dept, Long> deptManager;
+
+	public void setDeptManager(GenericManager<Dept, Long> deptManager) {
+		this.deptManager = deptManager;
+	} 
+	
+	@Autowired
+	@Qualifier("orgManager")
+	private GenericManager<Org, Long> orgManager;
+
+	public void setOrgManager(GenericManager<Org, Long> orgManager) {
+		this.orgManager = orgManager;
 	} 
 	
 	/**
@@ -75,6 +94,20 @@ public class UserForm {
 			//return "redirect:user.do";
 			return "redirect:userList.do";
 		} else {
+			
+			String orgName=request.getParameter("orgName");
+			if(null!=orgName&&orgName.length()>0)
+			{
+				Org curOrg=orgManager.get(Long.parseLong(orgName.trim()));
+				
+			}
+			String deptName=request.getParameter("deptName");
+			if(null!=deptName&&deptName.length()>0)
+			{
+				Dept curDept=deptManager.get(Long.parseLong(deptName.trim()));
+				user.setDept(curDept); 
+			}
+			
 			user = userManager.save(user);
 			return "redirect:userList.do";
 		}

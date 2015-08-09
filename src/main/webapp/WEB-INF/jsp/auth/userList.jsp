@@ -1,12 +1,13 @@
 <%@ page language="java" pageEncoding="UTF-8"
 	contentType="text/html;charset=utf-8"%>
 <%@ include file="/common/taglibs.jsp"%>
+<%@ include file="/common/meta.jsp" %>
 <head>
 <script type="text/javascript">  
 $(function() { 
-	$("#orgId").jsonSelect("userOrgSelectJson.do", ${orgId});
-	$("#deptId").jsonSelect("userDeptSelectJson.do", ${deptId});
-	$("#roleId").jsonSelect("userRoleSelectJson.do", ${roleId});
+	$("#orgId").jsonSelect("userOrgSelectJson.do", '${orgId}');
+	$("#deptId").jsonSelect("userDeptSelectJson.do", '${deptId}');
+	$("#roleId").jsonSelect("userRoleSelectJson.do", '${roleId}');
 	
 	$("#checkall").click( function() {
 		if($("#checkall").attr("checked")==undefined){

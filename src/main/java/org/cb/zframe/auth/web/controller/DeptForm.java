@@ -67,10 +67,10 @@ public class DeptForm {
 		if (id == null || id == 0L) {
 			dept = new Dept();
 		} else {
-			dept = deptManager.get(id);
-			List<Org> orgList=orgManager.getAll();
-			model.addAttribute("orgList",orgList);
+			dept = deptManager.get(id); 
 		}
+		List<Org> orgList=orgManager.getAll();
+		model.addAttribute("orgList",orgList);
 		model.addAttribute("dept",dept);
 		return "auth/deptForm";
 

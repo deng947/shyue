@@ -8,7 +8,7 @@
         <title><decorator:title/></title>
         <script>
 		var i=0;
-        	function hidden(){
+        function hidden(){
 			$("#left").css("display","none");
 			$("#mainContent").css("margin-left","0");
 			$("#arrow").html(">");
@@ -29,15 +29,24 @@
 				show();
 			}
 		}
-		$(function(){  
-		    var height = document.body.clientHeight;  
-		    $("#footer").css("top", height)  
-		    $(window).scroll(function () {  
-		        var scrollDiff = document.body.scrollTop;
-		        $("#footer").css("top", height + scrollDiff);
-		    });  
-		})
+		//$(function(){  
+		//    var height = document.body.clientHeight;  
+		//    $("#footer").css("top", height)  
+		//    $(window).scroll(function () {  
+		//        var scrollDiff = document.body.scrollTop;
+		//        $("#footer").css("top", height + scrollDiff);
+		//    });  
+		//})
 		</script>
+		<style type="text/css">
+	        .fixed_div {  
+	            position:absolute;  
+	            z-index:2008;  
+	            bottom:0px;   
+	            width:96%;
+	            border:1px solid;  
+	        }  
+      </style>  
 		<decorator:head/>
     </head>
 <body>
@@ -50,14 +59,14 @@
         	<div id="left" >
                  <jsp:include page="/leftMenu.do"/>
             </div><!-- end nav -->
-            <div id="navbar" onclick="javascript:clickBar();"><span id="arrow"><</span></div>
+            <div id="navbar" onclick="javascript:clickBar();" style="_height:600px;min-height:600px;"><span id="arrow">&#60;</span></div>
             <div id="mainContent">
                 <%@ include file="/common/messages.jsp" %>
                 <decorator:body/>
             </div>
         </div>
 
-        <div id="footer" class="clearfix" style="algin:center;">
+        <div id="footer" class="fixed_div" style="text-align:center;"   align="center">
             <jsp:include page="/common/footer.jsp"/>
         </div>
     </div>

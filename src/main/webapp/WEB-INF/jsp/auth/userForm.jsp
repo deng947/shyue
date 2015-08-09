@@ -5,9 +5,15 @@
 <script type="text/javascript">  
 <!--  
 $(function() { 
-	$("#orgId").jsonSelect("userOrgSelectJson.do", ${orgId});
-	$("#deptId").jsonSelect("userDeptSelectJson.do", ${deptId});
-});
+	$("#orgId").jsonSelect("userOrgSelectJson.do", '${orgId}');
+	$("#deptId").jsonSelect("userDeptSelectJson.do", '${deptId}');
+})
+function getDeptList()
+{
+	alert("-----"+$("#orgId").val());
+	$("#deptId").empty();
+	$("#deptId").jsonSelect("userDeptSelectJson.do", $("#orgId").val()); 
+}
 -->
 </script>
 </head>
@@ -27,7 +33,7 @@ $(function() {
 	<div class="rightForm"><label>Email：</label><form:input
 		path="email" /></div>
 	<div class="leftForm"><label>公司名称：</label><select name="orgName"
-		id="orgId"></select></div>
+		id="orgId" onchange="getDeptList();"></select></div>
 	<div class="rightForm"><label>部门名称：</label><select
 		name="deptName" id="deptId"></select></div>
 	<div class="formButton"><input type="submit" value="保存" /> <INPUT
